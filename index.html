@@ -269,10 +269,30 @@
         </div>
     </section>
 
-    <section class="section" id="contact">
+<section class="section" id="contact">
         <div class="container">
-            <div class="contact-grid">
-                <div>
+            <style>
+                .contact-grid-swapped {
+                    display: flex;
+                    flex-direction: column-reverse; /* Stacks Form on Top for mobile */
+                    gap: 4rem;
+                }
+
+                @media (min-width: 769px) {
+                    .contact-grid-swapped {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr; /* Side-by-side for desktop */
+                        flex-direction: row;
+                    }
+                    /* This moves the form to the first column on desktop */
+                    .form-container { order: 1; }
+                    .info-container { order: 2; }
+                }
+            </style>
+
+            <div class="contact-grid-swapped">
+                
+                <div class="info-container">
                     <h2 style="color: #1e3a8a; font-size: 2rem;">Check Availability in Your Area</h2>
                     <p style="margin: 1rem 0; font-weight: bold;">Takes less than 2 minutes. No obligation.</p>
                     <p style="margin-bottom: 1.5rem;">Serving the Denver Metro area including:</p>
@@ -286,7 +306,8 @@
                     <p><strong>Phone:</strong> <a href="tel:+13033512674" style="color:#1e3a8a; text-decoration:none;">(303) 351-2674</a></p>
                     <p><strong>Email:</strong> <a href="mailto:triple8rent@gmail.com" style="color:#1e3a8a; text-decoration:none;">triple8rent@gmail.com</a></p>
                 </div>
-                <div class="contact-form">
+
+                <div class="contact-form form-container">
                     <form action="https://formspree.io/f/mjgkkakn" method="POST" id="rentalForm">
                         <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html">
                         <div class="form-group"><label>Full Name</label><input type="text" name="name" required></div>
@@ -306,6 +327,7 @@
                         <button type="submit" class="btn" style="background:#10b981; color:white; width:100%; border:none; padding:1rem; font-weight:bold; cursor:pointer; border-radius:8px;">Request Availability</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </section>
