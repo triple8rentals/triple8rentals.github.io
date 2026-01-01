@@ -287,28 +287,29 @@
             <style>
                 .contact-grid-swapped {
                     display: flex;
-                    flex-direction: column-reverse; /* Stacks Form on Top for mobile */
-                    gap: 4rem;
+                    flex-direction: column-reverse; 
+                    gap: 3rem;
                 }
 
                 @media (min-width: 769px) {
                     .contact-grid-swapped {
                         display: grid;
-                        grid-template-columns: 1fr 1fr; /* Side-by-side for desktop */
+                        grid-template-columns: 1fr 1fr;
                         flex-direction: row;
                     }
-                    /* This moves the form to the first column on desktop */
                     .form-container { order: 1; }
                     .info-container { order: 2; }
+                }
+                
+                .form-header-box {
+                    margin-bottom: 1.5rem;
                 }
             </style>
 
             <div class="contact-grid-swapped">
                 
                 <div class="info-container">
-                    <h2 style="color: #1e3a8a; font-size: 2rem;">Check Availability in Your Area</h2>
-                    <p style="margin: 1rem 0; font-weight: bold;">Takes less than 2 minutes. No obligation.</p>
-                    <p style="margin-bottom: 1.5rem;">Serving the Denver Metro area including:</p>
+                    <p style="margin-bottom: 1.5rem; font-weight: 500; color: #475569;">Serving the Denver Metro area including:</p>
                     <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: bold; color: #1e3a8a; margin-bottom: 2rem;">
                         <li>Denver</li><li>Aurora</li><li>Arvada</li><li>Lakewood</li>
                         <li>Northglenn</li><li>Commerce City</li><li>Westminster</li>
@@ -320,25 +321,32 @@
                     <p><strong>Email:</strong> <a href="mailto:triple8rent@gmail.com" style="color:#1e3a8a; text-decoration:none;">triple8rent@gmail.com</a></p>
                 </div>
 
-                <div class="contact-form form-container">
-                    <form action="https://formspree.io/f/mjgkkakn" method="POST" id="rentalForm">
-                        <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html">
-                        <div class="form-group"><label>Full Name</label><input type="text" name="name" required></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" required></div>
-                        <div class="form-group"><label>Email Address</label><input type="email" name="email" required></div>
-                        <div class="form-group"><label>Service Address</label><input type="text" name="address" required placeholder="Street, City, Zip"></div>
-                        <div class="form-group"><label>Rental Plan</label>
-                            <select name="plan" id="planSelector">
-                                <option value="Set">Washer & Dryer Set ($65)</option>
-                                <option value="Washer">Washer Only ($40)</option>
-                                <option value="Dryer">Dryer Only ($40)</option>
-                            </select>
-                        </div>
-                        <div class="form-group"><label>Message (Optional)</label>
-                            <textarea name="message" rows="3" placeholder="Tell us about your needs or ask questions..."></textarea>
-                        </div>
-                        <button type="submit" class="btn" style="background:#10b981; color:white; width:100%; border:none; padding:1rem; font-weight:bold; cursor:pointer; border-radius:8px;">Request Availability</button>
-                    </form>
+                <div class="form-container">
+                    <div class="form-header-box">
+                        <h2 style="color: #1e3a8a; font-size: 2rem; margin-bottom: 0.5rem;">Check Availability in Your Area</h2>
+                        <p style="font-weight: bold; color: #334155;">Takes less than 2 minutes. No obligation.</p>
+                    </div>
+
+                    <div class="contact-form">
+                        <form action="https://formspree.io/f/mjgkkakn" method="POST" id="rentalForm">
+                            <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html">
+                            <div class="form-group"><label>Full Name</label><input type="text" name="name" required></div>
+                            <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" required></div>
+                            <div class="form-group"><label>Email Address</label><input type="email" name="email" required></div>
+                            <div class="form-group"><label>Service Address</label><input type="text" name="address" required placeholder="Street, City, Zip"></div>
+                            <div class="form-group"><label>Rental Plan</label>
+                                <select name="plan" id="planSelector">
+                                    <option value="Set">Washer & Dryer Set ($65)</option>
+                                    <option value="Washer">Washer Only ($40)</option>
+                                    <option value="Dryer">Dryer Only ($40)</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>Message (Optional)</label>
+                                <textarea name="message" rows="3" placeholder="Tell us about your needs or ask questions..."></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="background:#10b981; color:white; width:100%; border:none; padding:1rem; font-weight:bold; cursor:pointer; border-radius:8px;">Request Availability</button>
+                        </form>
+                    </div>
                 </div>
 
             </div>
