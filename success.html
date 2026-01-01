@@ -1,24 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Received - Triple 8 Rental</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .card { background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 500px; }
-        .icon { font-size: 3rem; color: #10b981; margin-bottom: 1rem; }
-        h1 { color: #1e3a8a; margin-bottom: 1rem; }
-        .btn { padding: 1rem 2rem; background: #1e3a8a; color: white; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 2rem; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Received | Triple 8 Rentals</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8fafc;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 520px;
+      width: 90%;
+    }
+
+    .icon {
+      font-size: 3rem;
+      color: #10b981;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      color: #1e3a8a;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    ul {
+      text-align: left;
+      margin: 1.5rem 0;
+      padding-left: 1.25rem;
+      color: #334155;
+    }
+
+    ul li {
+      margin-bottom: 0.75rem;
+    }
+
+    .btn {
+      padding: 1rem 2.25rem;
+      background: #1e3a8a;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 1.5rem;
+    }
+
+    .secondary {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .secondary a {
+      color: #1e3a8a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="card">
-        <div class="icon"><i class="fas fa-check-circle"></i></div>
-        <h1>Request Received!</h1>
-        <p>Thank you for choosing Triple 8 Rental. We have received your request and will contact you shortly.</p>
-        <a href="/" class="btn">Return Home</a>
+  <div class="card">
+    <div class="icon">
+      <i class="fas fa-check-circle"></i>
     </div>
+
+    <h1>You’re All Set</h1>
+
+    <p>
+      We’ve received your request and are checking availability in your area.
+      You’ll hear from us shortly by phone or email.
+    </p>
+
+    <ul>
+      <li>We confirm availability for your location</li>
+      <li>We review pricing and any applicable discounts</li>
+      <li>We contact you to finalize next steps</li>
+    </ul>
+
+    <a href="/" class="btn">Return to Homepage</a>
+
+    <div class="secondary">
+      Need something urgent?
+      <a href="tel:3033512674">Call or text us</a>
+    </div>
+  </div>
 </body>
 </html>
