@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple 8 Rental - Washer & Dryer Rentals from $40/month</title>
+    <title>Washer & Dryer Rentals in Denver. From $40/Month | Triple 8 Rentals</title>
+    <meta name="description" content="Stress-free washer and dryer rentals for Denver families. Plans from $40/month with free delivery, installation, and maintenance included.">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +23,7 @@
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; color: #1e3a8a; }
         .section-subtitle { text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #64748b; }
         
-        /* Updated Hero Section */
+        /* 1. Hero Formatting Updates */
         .hero { 
             background: linear-gradient(rgba(30, 58, 138, 0.75), rgba(23, 37, 84, 0.75)), url('background.jpg'); 
             background-size: cover; 
@@ -31,15 +33,31 @@
             align-items: center; 
             text-align: left; 
             color: white; 
-            padding-top: 120px; 
+            padding-top: 100px; 
         }
-        .hero h1 { font-size: 3.2rem; margin-bottom: 1rem; line-height: 1.2; }
-        .hero p { font-size: 1.3rem; margin-bottom: 2rem; max-width: 700px; }
-        .hero-list { list-style: none; margin-bottom: 2rem; }
-        .hero-list li { font-size: 1.2rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 12px; }
-        .hero-list i { color: #10b981; font-size: 1.4rem; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 0.5rem; line-height: 1.1; font-weight: 800; } /* Largest Headline */
+        .hero .subheadline { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 700; opacity: 1; } /* Smaller bold subheadline */
+        .hero-list { list-style: none; margin-bottom: 1.5rem; }
+        .hero-list li { font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 300; display: flex; align-items: center; gap: 12px; } /* Lightweight Bullets */
+        .hero-list i { color: #10b981; font-size: 1.2rem; }
+        
+        /* 1. Bright Accent CTA Button */
+        .cta-main { 
+            display: inline-block;
+            background: #f59e0b; /* Bright Amber Accent */
+            color: #1e293b; 
+            padding: 1.2rem 2.5rem; 
+            border-radius: 50px; 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+        .cta-main:hover { background: #fbbf24; transform: translateY(-3px); }
+        .hero-tiny-line { font-size: 0.85rem; opacity: 0.9; font-weight: 400; }
 
-        /* Pricing Cards */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .pricing-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid #1e3a8a; text-align: center; display: flex; flex-direction: column; }
         .price { font-size: 3rem; font-weight: 800; color: #10b981; }
@@ -56,7 +74,6 @@
         .discount-list li { margin-bottom: 10px; padding-left: 20px; position: relative; }
         .discount-list li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
 
-        /* FAQ */
         .faq-container { max-width: 900px; margin: 0 auto; }
         .faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
         .faq-question { padding: 1.2rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #1e3a8a; text-align: left; }
@@ -65,7 +82,6 @@
         .faq-item.active .chevron { transform: rotate(180deg); }
         .chevron { transition: transform 0.3s ease; }
 
-        /* Contact Section */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; }
         .contact-form { background: #1e293b; padding: 2.5rem; border-radius: 20px; color: white; }
         .form-group { margin-bottom: 1.2rem; }
@@ -75,9 +91,11 @@
         @media (max-width: 768px) { 
             .nav-links { display: none; } 
             .logo img { height: 60px; } 
-            .hero { text-align: center; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero-list li { justify-content: center; }
+            .hero { text-align: center; padding-top: 100px; min-height: 75vh; } /* Keeps CTA above fold on mobile */
+            .hero h1 { font-size: 2.4rem; }
+            .hero .subheadline { font-size: 1.2rem; }
+            .hero-list li { justify-content: center; font-size: 1rem; }
+            .cta-main { font-size: 1.2rem; padding: 1rem 2rem; }
         }
     </style>
 </head>
@@ -99,14 +117,19 @@
     <section class="hero" id="home">
         <div class="container">
             <h1>Stress-Free Washer & Dryer Rentals for Denver Families</h1>
-            <p>Never visit a laundromat again. We deliver, install, and maintain. You just do laundry.</p>
+            <p class="subheadline">Never visit a laundromat again. We deliver, install, and maintain. You just do laundry.</p>
+            
             <ul class="hero-list">
                 <li><i class="fas fa-check-circle"></i> Plans from $40/month</li>
                 <li><i class="fas fa-check-circle"></i> Free delivery & installation</li>
                 <li><i class="fas fa-check-circle"></i> Maintenance included</li>
                 <li><i class="fas fa-check-circle"></i> Local Denver support</li>
             </ul>
-            <p style="font-weight: bold; font-style: italic;">Denver families trust us with their laundry — no laundromats, no hauling, no stress.</p>
+
+            <p style="font-weight: bold; font-style: italic; margin-bottom: 1.5rem;">Denver families trust us with their laundry — no laundromats, no hauling, no stress.</p>
+            
+            <a href="#contact" class="cta-main">Check Availability</a>
+            <p class="hero-tiny-line">Serving the Denver Metro area with fast delivery — same-day when available</p>
         </div>
     </section>
 
@@ -191,42 +214,6 @@
                     <div class="faq-answer">Delivery and install is free for the vast majority of rentals. As long as there is direct line access to where the machines will go delivery is free. If there are stairs and landings either inside or outside of the home that cannot be navigated with the machines strapped to our dolly then there is a $50 charge to bring someone with us to assist with navigating those areas. If someone is available to help then the $50 will be waived.</div>
                 </div>
                 <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">What’s included in the maintenance coverage? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">Our maintenance coverage includes repairs for normal wear and tear, replacement of parts, and labor costs. If your appliance cannot be repaired, we’ll replace it free of charge. We do not cover damage due to misuse or abuse.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">How long are the rental agreements? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">We require a 6-month minimum contract, our best pricing is available with a 12-month term. After the term period, all plans convert to month-to-month agreements. We can do shorter month-to-month agreements with adjusted pricing.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">What payment methods do you accept? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">We accept all major credit cards including Visa, Mastercard, American Express, and Discover.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">How Much Does It Cost? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">We charge $40 for a washer or dryer only, $65 per month for washer and dryer set. All come with free delivery, installation and maintenance for the duration of the contract. For less than six months single machines are $60/month, sets are $95/month. A $5/month discount is available for autopay or 12-month terms.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">Do I Have To Pay A Down Payment? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">No! The first month’s rent IS your down payment and all that is due today. Simply fill out the form and we will schedule and deliver your appliances.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">Do I Get To Pick My Appliance? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">No. Our appliances are on a rotating basis, therefore we cannot guarantee what brand you will get. What we will guarantee is that the set you get will work great. If they break for any reason, we will fix or replace within 3 business days.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">Is There A Contract? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">Yes, during delivery you will fill out a contract that states you will rent for at least 6 months and are responsible for physical damage to the equipment.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">What if the machine stops working? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">Maintenance is 100% free. If a machine stops working, we will repair or replace it at no cost to you, typically within 48 hours.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">Is there a credit check? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">No. We do not perform credit checks. We offer rentals based on our basic requirements and a valid payment method.</div>
-                </div>
-                <div class="faq-item" onclick="this.classList.toggle('active')">
                     <div class="faq-question">How soon can I get my appliances? <i class="fas fa-chevron-down chevron"></i></div>
                     <div class="faq-answer">We pride ourselves on speed. Most customers receive their delivery within 24 to 48 hours of completing the request form.</div>
                 </div>
@@ -238,8 +225,9 @@
         <div class="container">
             <div class="contact-grid">
                 <div>
-                    <h2 style="color: #1e3a8a; font-size: 2rem;">Request Delivery</h2>
-                    <p style="margin: 1.5rem 0;">Serving the Denver Metro area including:</p>
+                    <h2 style="color: #1e3a8a; font-size: 2rem;">Check Availability in Your Area</h2>
+                    <p style="margin: 1rem 0; font-weight: bold;">Takes less than 2 minutes. No obligation.</p>
+                    <p style="margin-bottom: 1.5rem;">Serving the Denver Metro area including:</p>
                     <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: bold; color: #1e3a8a; margin-bottom: 2rem;">
                         <li>Denver</li><li>Aurora</li><li>Arvada</li><li>Lakewood</li>
                         <li>Northglenn</li><li>Commerce City</li><li>Westminster</li>
@@ -283,7 +271,8 @@
             document.getElementById('planSelector').value = planValue;
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         }
-        document.querySelectorAll('nav a, header a.phone-btn').forEach(anchor => {
+        /* Added the Hero CTA Smooth Scroll Logic */
+        document.querySelectorAll('nav a, header a.phone-btn, .hero a.cta-main').forEach(anchor => {
             if (anchor.getAttribute('href').startsWith('#')) {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -295,4 +284,3 @@
     </script>
 </body>
 </html>
-
