@@ -60,5 +60,134 @@
         .contact-form { background: #1e293b; padding: 2.5rem; border-radius: 20px; border: 1px solid #334155; }
         .form-group input, .form-group select, .form-group textarea { background: #334155; border: none; color: white; padding: 1rem; border-radius: 10px; width: 100%; margin-top: 5px; }
         
-        footer { background: #020617; color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; text-align:
+        footer { background: #020617; color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; text-align: center; border-top: 1px solid #1e293b; }
+
+        @media (max-width: 768px) { 
+            .nav-links { display: none; } 
+            .logo img { height: 60px; } /* Slightly smaller for mobile phones */
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.jpg" alt="Triple 8 Rental Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="tel:303-351-2674" class="phone-btn"><i class="fas fa-phone"></i> (303) 351-2674</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Premium Washer & Dryer Rentals</h1>
+            <p style="font-size: 1.4rem; margin-bottom: 2.5rem; opacity: 0.9;">Professional service for Denver, Aurora, and surrounding areas. Starting at just $35/month.</p>
+            <div>
+                <a href="#contact" class="btn btn-primary">Schedule Delivery</a>
+                <a href="#pricing" class="btn btn-secondary">View Rates</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="services">
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-truck feature-icon"></i>
+                <h3>Free Setup</h3>
+                <p>Delivery and professional installation are included with every rental.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tools feature-icon"></i>
+                <h3>Full Maintenance</h3>
+                <p>Never pay for a repair. We provide 100% maintenance coverage.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-calendar-check feature-icon"></i>
+                <h3>Flexible Terms</h3>
+                <p>Month-to-month rentals with no long-term contracts required.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="features-grid">
+            <div class="pricing-card">
+                <h3>Washer Only</h3>
+                <div class="price">$35</div>
+                <p>Monthly</p>
+                <a href="#contact" class="btn btn-primary">Select Plan</a>
+            </div>
+            <div class="pricing-card" style="border: 2px solid #10b981;">
+                <h3>Full Combo</h3>
+                <div class="price">$65</div>
+                <p>Monthly</p>
+                <a href="#contact" class="btn btn-primary">Best Value</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Dryer Only</h3>
+                <div class="price">$35</div>
+                <p>Monthly</p>
+                <a href="#contact" class="btn btn-primary">Select Plan</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+            <div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Let's Get Started</h2>
+                <p style="margin-bottom: 2rem;">Contact us today to schedule your delivery. Most installations happen within 48 hours.</p>
+                <p><strong>Call or Text:</strong> (303) 351-2674</p>
+                <p><strong>Service Area:</strong> Denver Metro Area</p>
+            </div>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/mjgkkakn" method="POST">
+                    <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Phone</label>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Plan</label>
+                        <select name="plan">
+                            <option value="Combo">Washer + Dryer Combo ($65)</option>
+                            <option value="Washer">Washer Only ($35)</option>
+                            <option value="Dryer">Dryer Only ($35)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin: 20px 0 0 0;">Send Quote Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Triple 8 Rental. Serving Denver since 2025.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
 
