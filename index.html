@@ -314,12 +314,51 @@
         <p>&copy; 2026 Triple 8 Rental. Professional Appliance Rentals.</p>
     </footer>
 
-    <script>
+<script>
+        // 1. YOUR EXISTING: Function to handle the plan selection jump
         function selectPlan(planValue) {
             document.getElementById('planSelector').value = planValue;
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         }
-        /* Added the Hero CTA Smooth Scroll Logic */
+
+        // 2. NEW: Redirect Fix (AJAX Submission)
+        // This sends the form data to Formspree silently and then forces the redirect
+        const form = document.getElementById("rentalForm");
+        
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault(); // This stops Formspree from opening their own success page
+            
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Visual feedback for the customer
+            submitButton.textContent = "Sending...";
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    // This forces the browser to go to your success page for FREE
+                    window.location.href = "https://triple8rentals.github.io/success.html";
+                } else {
+                    const data = await response.json();
+                    alert("Oops! There was a problem: " + (data.error || "Please try again."));
+                    submitButton.textContent = "Send Rental Request";
+                    submitButton.disabled = false;
+                }
+            } catch (error) {
+                alert("Oops! Network error. Please check your connection.");
+                submitButton.textContent = "Send Rental Request";
+                submitButton.disabled = false;
+            }
+        });
+
+        // 3. YOUR EXISTING: Hero CTA and Nav Smooth Scroll Logic
         document.querySelectorAll('nav a, header a.phone-btn, .hero a.cta-main').forEach(anchor => {
             if (anchor.getAttribute('href').startsWith('#')) {
                 anchor.addEventListener('click', function (e) {
