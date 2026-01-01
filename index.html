@@ -21,16 +21,29 @@
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; color: #1e3a8a; }
         .section-subtitle { text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #64748b; }
         
-        .hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(23, 37, 84, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3a8a" width="1200" height="600"/></svg>'); min-height: 70vh; display: flex; align-items: center; text-align: center; color: white; padding-top: 100px; }
+        .hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(23, 37, 84, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3a8a" width="1200" height="600"/></svg>'); min-height: 65vh; display: flex; align-items: center; text-align: center; color: white; padding-top: 100px; }
         .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
 
+        /* Pricing Cards & Checkmarks */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .pricing-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid #1e3a8a; text-align: center; }
+        .pricing-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid #1e3a8a; text-align: center; display: flex; flex-direction: column; }
         .price { font-size: 3rem; font-weight: 800; color: #10b981; }
-        .benefits-list { list-style: none; margin: 1.5rem 0; text-align: left; }
-        .benefits-list li { margin-bottom: 0.5rem; padding-left: 25px; position: relative; }
-        .benefits-list li::before { content: "\f00c"; font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; left: 0; color: #10b981; }
+        .benefits-list { list-style: none; margin: 1.5rem 0; text-align: left; flex-grow: 1; }
+        .benefits-list li { margin-bottom: 0.6rem; padding-left: 30px; position: relative; }
         
+        /* Fixed Checkmark Style */
+        .benefits-list li::before { 
+            content: '✓'; 
+            position: absolute; 
+            left: 0; 
+            color: #10b981; 
+            font-weight: bold; 
+            font-size: 1.2rem;
+        }
+        
+        .plan-select-btn { background: #1e3a8a; color: white; padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold; transition: 0.3s; border: none; cursor: pointer; }
+        .plan-select-btn:hover { background: #10b981; transform: translateY(-3px); }
+
         .discount-banner { background: #fef3c7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 10px; text-align: center; margin-top: 2rem; font-weight: bold; color: #92400e; }
 
         /* Step Process */
@@ -42,12 +55,12 @@
         .req-card { background: #f8fafc; padding: 2rem; border-radius: 15px; border-left: 5px solid #1e3a8a; }
         .req-card h4 { color: #1e3a8a; margin-bottom: 0.8rem; font-size: 1.2rem; }
 
-        /* Expandable FAQ */
+        /* FAQ */
         .faq-container { max-width: 800px; margin: 0 auto; }
         .faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
         .faq-question { padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #1e3a8a; }
         .faq-answer { padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: all 0.3s ease; background: #f8fafc; }
-        .faq-item.active .faq-answer { padding: 1.5rem; max-height: 200px; }
+        .faq-item.active .faq-answer { padding: 1.5rem; max-height: 250px; }
         .faq-item.active .chevron { transform: rotate(180deg); }
         .chevron { transition: transform 0.3s ease; }
 
@@ -67,6 +80,7 @@
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#requirements">Requirements</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <a href="tel:303-351-2674" class="phone-btn"><i class="fas fa-phone"></i> (303) 351-2674</a>
@@ -106,6 +120,7 @@
                         <li>Maintenance included</li>
                         <li>Energy efficient</li>
                     </ul>
+                    <button class="plan-select-btn" onclick="selectPlan('Washer')">Select Plan</button>
                 </div>
                 <div class="pricing-card" style="border: 3px solid #10b981; transform: scale(1.05);">
                     <h3>Washer & Dryer Set</h3>
@@ -116,6 +131,7 @@
                         <li>All hoses & vents included</li>
                         <li>Energy efficient</li>
                     </ul>
+                    <button class="plan-select-btn" style="background:#10b981;" onclick="selectPlan('Set')">Select Plan</button>
                 </div>
                 <div class="pricing-card">
                     <h3>Dryer Only</h3>
@@ -127,6 +143,7 @@
                         <li>Maintenance included</li>
                         <li>Energy efficient</li>
                     </ul>
+                    <button class="plan-select-btn" onclick="selectPlan('Dryer')">Select Plan</button>
                 </div>
             </div>
             <div class="discount-banner">
@@ -156,7 +173,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="faq">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
@@ -185,17 +202,18 @@
                     <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: bold; color: #1e3a8a;">
                         <li>Denver</li><li>Aurora</li><li>Arvada</li><li>Lakewood</li>
                         <li>Northglenn</li><li>Commerce City</li><li>Westminster</li>
+                        <li>Englewood</li><li>Wheat Ridge</li>
                     </ul>
                 </div>
                 <div class="contact-form">
-                    <form action="https://formspree.io/f/mjgkkakn" method="POST">
+                    <form action="https://formspree.io/f/mjgkkakn" method="POST" id="rentalForm">
                         <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html">
                         <div class="form-group"><label>Full Name</label><input type="text" name="name" required></div>
                         <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" required></div>
                         <div class="form-group"><label>Email Address</label><input type="email" name="email" required></div>
                         <div class="form-group"><label>Service Address</label><input type="text" name="address" required placeholder="Street, City, Zip"></div>
                         <div class="form-group"><label>Rental Plan</label>
-                            <select name="plan">
+                            <select name="plan" id="planSelector">
                                 <option value="Set">Washer & Dryer Set ($65)</option>
                                 <option value="Washer">Washer Only ($35)</option>
                                 <option value="Dryer">Dryer Only ($35)</option>
@@ -214,6 +232,23 @@
     <footer style="background: #0f172a; color: white; padding: 3rem 0; text-align: center;">
         <p>&copy; 2026 Triple 8 Rental. Professional Appliance Rentals.</p>
     </footer>
+
+    <script>
+        // Pre-fill dropdown and scroll to form
+        function selectPlan(planValue) {
+            document.getElementById('planSelector').value = planValue;
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scrolling for header links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
 
