@@ -8,188 +8,57 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; overflow-x: hidden; }
-        header { background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%); color: white; padding: 0.5rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        
+        /* White Header Bar */
+        header { 
+            background: #ffffff; 
+            padding: 0.5rem 0; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+        }
+        
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         
+        /* Logo Scaled to 88px */
         .logo img { 
-            height: 50px; 
+            height: 88px; 
             width: auto; 
             display: block;
         }
 
         .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 25px; }
-        .nav-links a:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
-        .phone-btn { background: linear-gradient(45deg, #10b981, #059669); padding: 0.7rem 1.5rem; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; text-decoration: none; color: white; }
-        .hero { background: linear-gradient(135deg, rgba(44, 90, 160, 0.9), rgba(30, 58, 138, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f8ff" width="1200" height="600"/><circle fill="%23e0f2fe" cx="200" cy="150" r="100" opacity="0.3"/><circle fill="%23e0f2fe" cx="800" cy="300" r="150" opacity="0.2"/><circle fill="%23e0f2fe" cx="1000" cy="100" r="80" opacity="0.4"/></svg>'); background-size: cover; background-position: center; min-height: 100vh; display: flex; align-items: center; text-align: center; color: white; position: relative; overflow: hidden; padding-top: 80px; }
-        .hero-content { max-width: 800px; margin: 0 auto; padding: 0 2rem; z-index: 2; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-        .hero .subtitle { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9; }
-        .btn { padding: 1rem 2rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
-        .btn-primary { background: linear-gradient(45deg, #10b981, #059669); color: white; }
+        .nav-links a { color: #1e3a8a; text-decoration: none; font-weight: 700; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 25px; }
+        .nav-links a:hover { color: #10b981; }
+        
+        .phone-btn { background: #10b981; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; text-decoration: none; color: white; display: flex; align-items: center; gap: 8px; }
+        .phone-btn:hover { background: #059669; transform: scale(1.05); }
+
+        /* Hero Section with Brand Blue Overlay */
+        .hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(23, 37, 84, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3a8a" width="1200" height="600"/><circle fill="%23ffffff" cx="200" cy="150" r="100" opacity="0.05"/></svg>'); background-size: cover; min-height: 100vh; display: flex; align-items: center; text-align: center; color: white; padding-top: 120px; }
+        .hero-content { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.1; }
+        
+        .btn { padding: 1rem 2.5rem; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin: 10px; }
+        .btn-primary { background: #10b981; color: white; border: none; }
         .btn-secondary { background: transparent; color: white; border: 2px solid white; }
+        .btn-primary:hover { background: #059669; }
+
         .features { padding: 5rem 0; background: #f8fafc; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #1e293b; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .feature-card { background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 30px rgba(0,0,0,0.1); transition: all 0.3s ease; }
-        .feature-icon { font-size: 3rem; color: #10b981; margin-bottom: 1rem; }
-        .pricing { padding: 5rem 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; }
-        .pricing-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .pricing-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); padding: 2rem; border-radius: 20px; }
-        .price { font-size: 3rem; font-weight: bold; color: #10b981; }
-        .contact { padding: 5rem 0; background: #1e293b; color: white; }
-        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-        .contact-form { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; }
-        .form-group { margin-bottom: 1.5rem; text-align: left; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 1rem; border-radius: 10px; background: rgba(255,255,255,0.9); color: #333; border: 1px solid rgba(255,255,255,0.2); }
-        footer { background: #0f172a; color: white; padding: 3rem 0 1rem; text-align: center; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        @media (max-width: 768px) { 
-            .nav-links { display: none; } 
-            .contact-content { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="logo.jpg" alt="Triple 8 Rental Logo">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="tel:303-351-2674" class="phone-btn"><i class="fas fa-phone"></i> (303) 351-2674</a>
-        </nav>
-    </header>
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3.5rem; color: #1e3a8a; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid #10b981; }
+        .feature-icon { font-size: 3.5rem; color: #1e3a8a; margin-bottom: 1.5rem; }
+        
+        .pricing { padding: 6rem 0; background: #1e3a8a; color: white; text-align: center; }
+        .pricing-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 3rem 2rem; border-radius: 25px; backdrop-filter: blur(10px); }
+        .price { font-size: 3.5rem; font-weight: 800; color: #10b981; margin: 1rem 0; }
+        
+        .contact { padding: 6rem 0; background: #0f172a; color: white; }
+        .contact-form { background: #1e293b; padding: 2.5rem; border-radius: 20px; border: 1px solid #334155; }
+        .form-group input, .form-group select, .form-group textarea { background: #334155; border: none; color: white; padding: 1rem; border-radius: 10px; width: 100%; margin-top: 5px; }
+        
+        footer { background: #020617; color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; text-align:
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Never Visit a Laundromat Again!</h1>
-            <p class="subtitle">Rent premium washers & dryers starting at just $35/month. Free delivery, installation, and maintenance included.</p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Get Started Today</a>
-                <a href="#pricing" class="btn btn-secondary"><i class="fas fa-dollar-sign"></i> View Pricing</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="features" id="services">
-        <div class="container">
-            <h2 class="section-title">Why Choose Triple 8 Rental?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-truck"></i></div>
-                    <h3>Free Delivery & Installation</h3>
-                    <p>Professional team ensuring perfect setup at no cost.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-tools"></i></div>
-                    <h3>Free Maintenance</h3>
-                    <p>Repairs covered. If something breaks, we fix it fast.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-star"></i></div>
-                    <h3>Premium Brands</h3>
-                    <p>Top-quality units from Whirlpool, GE, and Samsung.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 class="section-title">Simple, Affordable Pricing</h2>
-            <div class="pricing-cards">
-                <div class="pricing-card">
-                    <h3>Washer Only</h3>
-                    <div class="price">$35</div>
-                    <p>per month</p>
-                    <a href="#contact" class="btn btn-primary" onclick="selectPlan('washer')">Choose Plan</a>
-                </div>
-                <div class="pricing-card" style="transform: scale(1.05); background: rgba(255,255,255,0.2);">
-                    <h3>Washer + Dryer Combo</h3>
-                    <div class="price">$65</div>
-                    <p>per month</p>
-                    <a href="#contact" class="btn btn-primary" onclick="selectPlan('combo')">Most Popular</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Dryer Only</h3>
-                    <div class="price">$35</div>
-                    <p>per month</p>
-                    <a href="#contact" class="btn btn-primary" onclick="selectPlan('dryer')">Choose Plan</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Get Your Appliances Today</h2>
-            <div class="contact-content">
-                <div>
-                    <h3 style="margin-bottom: 2rem;">Ready to get started?</h3>
-                    <p><strong>Call Us:</strong> (303) 351-2674</p>
-                    <p><strong>Service Areas:</strong> Denver, Aurora, Commerce City, Westminster</p>
-                </div>
-                <div class="contact-form">
-                    <h3 style="margin-bottom: 1.5rem;">Request a Quote</h3>
-                    <form action="https://formspree.io/f/mjgkkakn" method="POST">
-                        <input type="hidden" name="_subject" value="New Quote Request - Triple 8 Rental" />
-                        <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html" />
-                        <input type="text" name="_gotcha" style="display:none" />
-
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Appliance Needed</label>
-                            <select id="appliances" name="appliance_type" required>
-                                <option value="washer">Washer Only ($35/mo)</option>
-                                <option value="dryer">Dryer Only ($35/mo)</option>
-                                <option value="combo" selected>Washer + Dryer Combo ($65/mo)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Request</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Triple 8 Rental. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        function selectPlan(plan) { document.getElementById('appliances').value = plan; }
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-</body>
-</html>
