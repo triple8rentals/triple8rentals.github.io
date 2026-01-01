@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple 8 Rental - Washer & Dryer Rentals from $35/month</title>
+    <title>Triple 8 Rental - Washer & Dryer Rentals from $40/month</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,12 +21,10 @@
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; color: #1e3a8a; }
         .section-subtitle { text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #64748b; }
         
-        /* Updated Hero Section with background.jpg */
         .hero { 
             background: linear-gradient(rgba(30, 58, 138, 0.7), rgba(23, 37, 84, 0.7)), url('background.jpg'); 
             background-size: cover; 
             background-position: center;
-            background-attachment: scroll;
             min-height: 65vh; 
             display: flex; 
             align-items: center; 
@@ -46,7 +44,12 @@
         .plan-select-btn { background: #1e3a8a; color: white; padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold; transition: 0.3s; border: none; cursor: pointer; }
         .plan-select-btn:hover { background: #10b981; transform: translateY(-3px); }
 
-        .discount-banner { background: #fef3c7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 10px; text-align: center; margin-top: 2rem; font-weight: bold; color: #92400e; }
+        /* Updated Discounts Section */
+        .discount-container { background: #fef3c7; border: 1px solid #f59e0b; padding: 2rem; border-radius: 20px; margin-top: 3rem; color: #92400e; }
+        .discount-container h3 { margin-bottom: 1rem; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .discount-list { list-style: none; text-align: left; max-width: 600px; margin: 0 auto; }
+        .discount-list li { margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .discount-list li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
 
         .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; text-align: center; }
         .step-icon { font-size: 2.5rem; color: #10b981; margin-bottom: 1rem; }
@@ -55,11 +58,11 @@
         .req-card { background: #f8fafc; padding: 2rem; border-radius: 15px; border-left: 5px solid #1e3a8a; }
         .req-card h4 { color: #1e3a8a; margin-bottom: 0.8rem; font-size: 1.2rem; }
 
-        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-container { max-width: 900px; margin: 0 auto; }
         .faq-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-        .faq-question { padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #1e3a8a; }
-        .faq-answer { padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: all 0.3s ease; background: #f8fafc; }
-        .faq-item.active .faq-answer { padding: 1.5rem; max-height: 250px; }
+        .faq-question { padding: 1.2rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #1e3a8a; text-align: left; }
+        .faq-answer { padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: all 0.3s ease; background: #f8fafc; text-align: left; line-height: 1.8; }
+        .faq-item.active .faq-answer { padding: 1.5rem; max-height: 500px; }
         .faq-item.active .chevron { transform: rotate(180deg); }
         .chevron { transition: transform 0.3s ease; }
 
@@ -89,7 +92,7 @@
     <section class="hero" id="home">
         <div class="container">
             <h1>Never Visit a Laundromat Again!</h1>
-            <p style="font-size: 1.5rem; margin-top: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">Rent premium washers & dryers starting at just $35/month. Free delivery, installation, and maintenance included.</p>
+            <p style="font-size: 1.5rem; margin-top: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">Rent premium washers & dryers starting at just $40/month. Free delivery, installation, and maintenance included.</p>
         </div>
     </section>
 
@@ -111,7 +114,7 @@
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Washer Only</h3>
-                    <div class="price">$35<small style="font-size: 1rem; color: #64748b;">/mo</small></div>
+                    <div class="price">$40<small style="font-size: 1rem; color: #64748b;">/mo</small></div>
                     <ul class="benefits-list">
                         <li>Top-loading washer</li>
                         <li>Standard washing capacity</li>
@@ -134,7 +137,7 @@
                 </div>
                 <div class="pricing-card">
                     <h3>Dryer Only</h3>
-                    <div class="price">$35<small style="font-size: 1rem; color: #64748b;">/mo</small></div>
+                    <div class="price">$40<small style="font-size: 1rem; color: #64748b;">/mo</small></div>
                     <ul class="benefits-list">
                         <li>High-efficiency electric dryer</li>
                         <li>Standard drying capacity</li>
@@ -145,8 +148,13 @@
                     <button class="plan-select-btn" onclick="selectPlan('Dryer')">Select Plan</button>
                 </div>
             </div>
-            <div class="discount-banner">
-                <i class="fas fa-tag"></i> DISCOUNTS: Save with Autopay setup or a 12-month term commitment!
+            
+            <div class="discount-container">
+                <h3><i class="fas fa-tags"></i> Available Discounts</h3>
+                <ul class="discount-list">
+                    <li><strong>AutoPay Discount.</strong> $5/month for enrolling in automatic payments.</li>
+                    <li><strong>Term Commitment Discount.</strong> $5/month with a 12-month agreement.</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -177,16 +185,36 @@
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
                 <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">What if the machine breaks? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">Maintenance is 100% free. If a machine stops working, we will repair or replace it at no cost to you, typically within 48 hours.</div>
+                    <div class="faq-question">Is delivery and install free? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">Delivery and install is free for the vast majority of rentals. As long as there is direct line access to where the machines will go delivery is free. If there are stairs and landings either inside or outside of the home that cannot be navigated with the machines strapped to our dolly then there is a $50 charge to bring someone with us to assist with navigating those areas for when we drop off the machines and when we pick them up. If someone is available to help then the $50 will be waived.</div>
                 </div>
                 <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">Is there a credit check? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">No. We do not perform credit checks. We offer rentals based on our basic requirements and a valid payment method.</div>
+                    <div class="faq-question">What’s included in the maintenance coverage? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">Our maintenance coverage includes repairs for normal wear and tear, replacement of parts, and labor costs. If your appliance cannot be repaired, we’ll replace it free of charge. We do not cover damage due to misuse or abuse.</div>
                 </div>
                 <div class="faq-item" onclick="this.classList.toggle('active')">
-                    <div class="faq-question">How soon can I get my appliances? <i class="fas fa-chevron-down chevron"></i></div>
-                    <div class="faq-answer">We pride ourselves on speed. Most customers receive their delivery within 24 to 48 hours of completing the request form.</div>
+                    <div class="faq-question">How long are the rental agreements? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">We require a 6-month minimum contract, our best pricing is available with a 12-month term. After the term period, all plans convert to month-to-month agreements with no penalties for returning. We can do shorter month-to-month agreements with adjusted pricing.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">What payment methods do you accept? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">We accept all major credit cards including Visa, Mastercard, American Express, and Discover.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">How Much Does It Cost? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">We charge $40 for a washer or dryer only, $65 per month for washer and dryer set. All come with free delivery, installation and maintenance for the duration of the contract. For less than six months single machines are $60/month, sets are $95/month. A $5/month discount is available for autopay enrollment. A $5/month discount is available for signing a 12-month term.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">Do I Have To Pay A Down Payment? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">No! The first month’s rent IS your down payment and all that is due today. Simply fill out the form and we will schedule and deliver your appliances.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">Do I Get To Pick My Appliance? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">No. Our appliances are on a rotating basis, therefore we cannot guarantee what brand you will get. What we will guarantee is that the set you get will work great. If they break for any reason, we will fix or replace within 3 business days.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">Is There A Contract? <i class="fas fa-chevron-down chevron"></i></div>
+                    <div class="faq-answer">Yes, during delivery you will fill out a contract that states you will rent for at least 6 months and are responsible for physical damage to the equipment.</div>
                 </div>
             </div>
         </div>
@@ -214,8 +242,8 @@
                         <div class="form-group"><label>Rental Plan</label>
                             <select name="plan" id="planSelector">
                                 <option value="Set">Washer & Dryer Set ($65)</option>
-                                <option value="Washer">Washer Only ($35)</option>
-                                <option value="Dryer">Dryer Only ($35)</option>
+                                <option value="Washer">Washer Only ($40)</option>
+                                <option value="Dryer">Dryer Only ($40)</option>
                             </select>
                         </div>
                         <div class="form-group"><label>Message (Optional)</label>
