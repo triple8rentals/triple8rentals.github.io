@@ -8,14 +8,20 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; overflow-x: hidden; }
-        header { background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        header { background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%); color: white; padding: 0.5rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .logo { font-size: 1.8rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        
+        .logo img { 
+            height: 50px; 
+            width: auto; 
+            display: block;
+        }
+
         .nav-links { display: flex; list-style: none; gap: 2rem; }
         .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 25px; }
         .nav-links a:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
         .phone-btn { background: linear-gradient(45deg, #10b981, #059669); padding: 0.7rem 1.5rem; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; text-decoration: none; color: white; }
-        .hero { background: linear-gradient(135deg, rgba(44, 90, 160, 0.9), rgba(30, 58, 138, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f8ff" width="1200" height="600"/><circle fill="%23e0f2fe" cx="200" cy="150" r="100" opacity="0.3"/><circle fill="%23e0f2fe" cx="800" cy="300" r="150" opacity="0.2"/><circle fill="%23e0f2fe" cx="1000" cy="100" r="80" opacity="0.4"/></svg>'); background-size: cover; background-position: center; min-height: 100vh; display: flex; align-items: center; text-align: center; color: white; position: relative; overflow: hidden; }
+        .hero { background: linear-gradient(135deg, rgba(44, 90, 160, 0.9), rgba(30, 58, 138, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f8ff" width="1200" height="600"/><circle fill="%23e0f2fe" cx="200" cy="150" r="100" opacity="0.3"/><circle fill="%23e0f2fe" cx="800" cy="300" r="150" opacity="0.2"/><circle fill="%23e0f2fe" cx="1000" cy="100" r="80" opacity="0.4"/></svg>'); background-size: cover; background-position: center; min-height: 100vh; display: flex; align-items: center; text-align: center; color: white; position: relative; overflow: hidden; padding-top: 80px; }
         .hero-content { max-width: 800px; margin: 0 auto; padding: 0 2rem; z-index: 2; }
         .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
         .hero .subtitle { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9; }
@@ -40,13 +46,19 @@
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 1rem; border-radius: 10px; background: rgba(255,255,255,0.9); color: #333; border: 1px solid rgba(255,255,255,0.2); }
         footer { background: #0f172a; color: white; padding: 3rem 0 1rem; text-align: center; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        @media (max-width: 768px) { .nav-links { display: none; } .contact-content { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { 
+            .nav-links { display: none; } 
+            .contact-content { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo"><i class="fas fa-washing-machine"></i> Triple 8 Rental</div>
+            <div class="logo">
+                <img src="logo.jpg" alt="Triple 8 Rental Logo">
+            </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
@@ -150,7 +162,7 @@
                             <select id="appliances" name="appliance_type" required>
                                 <option value="washer">Washer Only ($35/mo)</option>
                                 <option value="dryer">Dryer Only ($35/mo)</option>
-                                <option value="combo">Washer + Dryer Combo ($65/mo)</option>
+                                <option value="combo" selected>Washer + Dryer Combo ($65/mo)</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -166,18 +178,7 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h3>Triple 8 Rental</h3>
-                    <p>Making laundry convenient for Denver families since 2015.</p>
-                </div>
-                <div>
-                    <h3>Contact</h3>
-                    <p>(303) 351-2674</p>
-                    <p>triple8rent@gmail.com</p>
-                </div>
-            </div>
-            <p>&copy; 2025 Triple 8 Rental. All rights reserved.</p>
+            <p>&copy; 2026 Triple 8 Rental. All rights reserved.</p>
         </div>
     </footer>
 
