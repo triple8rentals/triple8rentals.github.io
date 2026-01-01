@@ -9,75 +9,53 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; overflow-x: hidden; }
         
-        /* White Header Bar */
-        header { 
-            background: #ffffff; 
-            padding: 0.5rem 0; 
-            position: fixed; 
-            width: 100%; 
-            top: 0; 
-            z-index: 1000; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-        }
-        
+        header { background: #ffffff; padding: 0.5rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        
-        /* Logo Scaled to 88px */
-        .logo img { 
-            height: 88px; 
-            width: auto; 
-            display: block;
-        }
-
+        .logo img { height: 88px; width: auto; display: block; }
         .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: #1e3a8a; text-decoration: none; font-weight: 700; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 25px; }
-        .nav-links a:hover { color: #10b981; }
-        
-        .phone-btn { background: #10b981; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; text-decoration: none; color: white; display: flex; align-items: center; gap: 8px; }
-        .phone-btn:hover { background: #059669; transform: scale(1.05); }
+        .nav-links a { color: #1e3a8a; text-decoration: none; font-weight: 700; }
+        .phone-btn { background: #10b981; padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: bold; text-decoration: none; color: white; display: flex; align-items: center; gap: 8px; }
 
-        /* Hero Section with Brand Blue Overlay */
-        .hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(23, 37, 84, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3a8a" width="1200" height="600"/><circle fill="%23ffffff" cx="200" cy="150" r="100" opacity="0.05"/></svg>'); background-size: cover; min-height: 100vh; display: flex; align-items: center; text-align: center; color: white; padding-top: 120px; }
-        .hero-content { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.1; }
+        .section { padding: 5rem 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #1e3a8a; }
         
-        .btn { padding: 1rem 2.5rem; border-radius: 50px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin: 10px; }
-        .btn-primary { background: #10b981; color: white; border: none; }
-        .btn-secondary { background: transparent; color: white; border: 2px solid white; }
-        .btn-primary:hover { background: #059669; }
+        .hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(23, 37, 84, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231e3a8a" width="1200" height="600"/></svg>'); min-height: 80vh; display: flex; align-items: center; text-align: center; color: white; padding-top: 100px; }
+        
+        /* Pricing Cards */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .pricing-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 5px solid #1e3a8a; }
+        .pricing-card h3 { color: #1e3a8a; font-size: 1.5rem; margin-bottom: 1rem; }
+        .price { font-size: 3rem; font-weight: 800; color: #10b981; }
+        .benefits-list { list-style: none; margin: 1.5rem 0; text-align: left; }
+        .benefits-list li { margin-bottom: 0.5rem; padding-left: 25px; position: relative; }
+        .benefits-list li::before { content: "\f00c"; font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; left: 0; color: #10b981; }
+        
+        .discount-banner { background: #fef3c7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 10px; text-align: center; margin-top: 2rem; font-weight: bold; color: #92400e; }
 
-        .features { padding: 5rem 0; background: #f8fafc; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3.5rem; color: #1e3a8a; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid #10b981; }
-        .feature-icon { font-size: 3.5rem; color: #1e3a8a; margin-bottom: 1.5rem; }
-        
-        .pricing { padding: 6rem 0; background: #1e3a8a; color: white; text-align: center; }
-        .pricing-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 3rem 2rem; border-radius: 25px; backdrop-filter: blur(10px); }
-        .price { font-size: 3.5rem; font-weight: 800; color: #10b981; margin: 1rem 0; }
-        
-        .contact { padding: 6rem 0; background: #0f172a; color: white; }
-        .contact-form { background: #1e293b; padding: 2.5rem; border-radius: 20px; border: 1px solid #334155; }
-        .form-group input, .form-group select, .form-group textarea { background: #334155; border: none; color: white; padding: 1rem; border-radius: 10px; width: 100%; margin-top: 5px; }
-        
-        footer { background: #020617; color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; text-align: center; border-top: 1px solid #1e293b; }
+        /* Step Process */
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; text-align: center; }
+        .step-icon { font-size: 2.5rem; color: #10b981; margin-bottom: 1rem; }
 
-        @media (max-width: 768px) { 
-            .nav-links { display: none; } 
-            .logo img { height: 60px; } /* Slightly smaller for mobile phones */
-            .hero h1 { font-size: 2.2rem; }
-        }
+        .requirements-box { background: #f1f5f9; padding: 2.5rem; border-radius: 20px; }
+        
+        .faq-item { margin-bottom: 1.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; }
+        .faq-item strong { color: #1e3a8a; display: block; margin-bottom: 0.5rem; }
+
+        .contact-form { background: #1e293b; padding: 2.5rem; border-radius: 20px; color: white; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border-radius: 8px; border: none; background: #334155; color: white; }
+
+        @media (max-width: 768px) { .nav-links { display: none; } .logo img { height: 60px; } }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">
-                <img src="logo.jpg" alt="Triple 8 Rental Logo">
-            </div>
+            <div class="logo"><img src="logo.jpg" alt="Triple 8 Rental Logo"></div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -85,109 +63,129 @@
         </nav>
     </header>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Premium Washer & Dryer Rentals</h1>
-            <p style="font-size: 1.4rem; margin-bottom: 2.5rem; opacity: 0.9;">Professional service for Denver, Aurora, and surrounding areas. Starting at just $35/month.</p>
-            <div>
-                <a href="#contact" class="btn btn-primary">Schedule Delivery</a>
-                <a href="#pricing" class="btn btn-secondary">View Rates</a>
+    <section class="hero">
+        <div class="container">
+            <h1>Simple Appliance Rentals for Denver</h1>
+            <p style="font-size: 1.3rem; margin-top: 1rem;">Free Delivery • No Credit Checks • Maintenance Included</p>
+        </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div><i class="fas fa-file-alt step-icon"></i><h4>1. Fill Out Form</h4><p>Complete our simple rental request form online.</p></div>
+                <div><i class="fas fa-phone-alt step-icon"></i><h4>2. We Contact You</h4><p>We'll call to confirm your order and schedule delivery.</p></div>
+                <div><i class="fas fa-truck-loading step-icon"></i><h4>3. Free Installation</h4><p>Professional delivery and setup at no cost to you.</p></div>
+                <div><i class="fas fa-smile step-icon"></i><h4>4. Enjoy Worry-Free</h4><p>We handle all maintenance for the life of the rental.</p></div>
             </div>
         </div>
     </section>
 
-    <section class="features" id="services">
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fas fa-truck feature-icon"></i>
-                <h3>Free Setup</h3>
-                <p>Delivery and professional installation are included with every rental.</p>
+    <section class="section" id="pricing" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">Pricing & Packages</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Washer Only</h3>
+                    <div class="price">$35<small style="font-size: 1rem; color: #64748b;">/mo</small></div>
+                    <ul class="benefits-list">
+                        <li>Top-loading washer</li>
+                        <li>Standard washing capacity</li>
+                        <li>Free delivery & installation</li>
+                        <li>Maintenance included</li>
+                        <li>Energy efficient</li>
+                    </ul>
+                </div>
+                <div class="pricing-card" style="border: 3px solid #10b981; transform: scale(1.05);">
+                    <h3>Washer & Dryer Set</h3>
+                    <div class="price">$65<small style="font-size: 1rem; color: #64748b;">/mo</small></div>
+                    <ul class="benefits-list">
+                        <li>Matching high-capacity set</li>
+                        <li>Electric dryer (3 or 4 prong)</li>
+                        <li>Free delivery & installation</li>
+                        <li>All hoses & vents included</li>
+                        <li>Maintenance included</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3>Dryer Only</h3>
+                    <div class="price">$35<small style="font-size: 1rem; color: #64748b;">/mo</small></div>
+                    <ul class="benefits-list">
+                        <li>High-efficiency electric dryer</li>
+                        <li>Standard drying capacity</li>
+                        <li>Free delivery & installation</li>
+                        <li>Maintenance included</li>
+                        <li>Energy efficient</li>
+                    </ul>
+                </div>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-tools feature-icon"></i>
-                <h3>Full Maintenance</h3>
-                <p>Never pay for a repair. We provide 100% maintenance coverage.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-calendar-check feature-icon"></i>
-                <h3>Flexible Terms</h3>
-                <p>Month-to-month rentals with no long-term contracts required.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="pricing" id="pricing">
-        <div class="features-grid">
-            <div class="pricing-card">
-                <h3>Washer Only</h3>
-                <div class="price">$35</div>
-                <p>Monthly</p>
-                <a href="#contact" class="btn btn-primary">Select Plan</a>
-            </div>
-            <div class="pricing-card" style="border: 2px solid #10b981;">
-                <h3>Full Combo</h3>
-                <div class="price">$65</div>
-                <p>Monthly</p>
-                <a href="#contact" class="btn btn-primary">Best Value</a>
-            </div>
-            <div class="pricing-card">
-                <h3>Dryer Only</h3>
-                <div class="price">$35</div>
-                <p>Monthly</p>
-                <a href="#contact" class="btn btn-primary">Select Plan</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
-            <div>
-                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Let's Get Started</h2>
-                <p style="margin-bottom: 2rem;">Contact us today to schedule your delivery. Most installations happen within 48 hours.</p>
-                <p><strong>Call or Text:</strong> (303) 351-2674</p>
-                <p><strong>Service Area:</strong> Denver Metro Area</p>
-            </div>
-            <div class="contact-form">
-                <form action="https://formspree.io/f/mjgkkakn" method="POST">
-                    <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" required>
-                    </div>
-                    <div class="form-group" style="margin-top: 15px;">
-                        <label>Phone</label>
-                        <input type="tel" name="phone" required>
-                    </div>
-                    <div class="form-group" style="margin-top: 15px;">
-                        <label>Email</label>
-                        <input type="email" name="email" required>
-                    </div>
-                    <div class="form-group" style="margin-top: 15px;">
-                        <label>Plan</label>
-                        <select name="plan">
-                            <option value="Combo">Washer + Dryer Combo ($65)</option>
-                            <option value="Washer">Washer Only ($35)</option>
-                            <option value="Dryer">Dryer Only ($35)</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin: 20px 0 0 0;">Send Quote Request</button>
-                </form>
+            <div class="discount-banner">
+                <i class="fas fa-tag"></i> SAVE MORE: Get discounts for setting up Autopay or committing to a 12-month term!
             </div>
         </div>
     </section>
 
-    <footer>
+    <section class="section">
+        <div class="container">
+            <div class="requirements-box">
+                <h2 style="color: #1e3a8a; margin-bottom: 1.5rem; text-align: center;">Rental Requirements</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div><p><strong><i class="fas fa-id-card"></i> Identification</strong><br>Valid government-issued photo ID required.</p></div>
+                    <div><p><strong><i class="fas fa-plug"></i> Proper Hookups</strong><br>Must have standard water and electrical hookups ready.</p></div>
+                    <div><p><strong><i class="fas fa-credit-card"></i> Payment Method</strong><br>Valid debit or credit card for monthly billing.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item"><strong>What if the machine breaks?</strong>Maintenance is 100% free. We will repair or replace it at no cost to you.</div>
+                <div class="faq-item"><strong>Is there a credit check?</strong>No. We offer rentals based on basic requirements, not credit scores.</div>
+                <div class="faq-item"><strong>How soon can I get my appliances?</strong>We typically deliver within 24 to 48 hours of your request.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+                <div>
+                    <h2 style="color: #1e3a8a; font-size: 2rem;">Request Delivery</h2>
+                    <p style="margin: 1.5rem 0;">We serve the entire Denver Metro area including:</p>
+                    <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: bold; color: #1e3a8a;">
+                        <li>Denver</li><li>Aurora</li><li>Arvada</li><li>Lakewood</li>
+                        <li>Northglenn</li><li>Commerce City</li><li>Westminster</li>
+                    </ul>
+                </div>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/mjgkkakn" method="POST">
+                        <input type="hidden" name="_next" value="https://triple8rentals.github.io/success.html">
+                        <div class="form-group"><label>Full Name</label><input type="text" name="name" required></div>
+                        <div class="form-group"><label>Phone</label><input type="tel" name="phone" required></div>
+                        <div class="form-group"><label>Appliance Plan</label>
+                            <select name="plan">
+                                <option value="Set">Washer & Dryer Set ($65)</option>
+                                <option value="Washer">Washer Only ($35)</option>
+                                <option value="Dryer">Dryer Only ($35)</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Notes or Questions (Optional)</label>
+                            <textarea name="notes" rows="3" placeholder="Tell us about your hookups or ask a question..."></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="background:#10b981; color:white; width:100%; border:none; padding:1rem; font-weight:bold; cursor:pointer;">Send Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #0f172a; color: white; padding: 3rem 0; text-align: center;">
         <p>&copy; 2026 Triple 8 Rental. Serving Denver since 2025.</p>
     </footer>
-
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
 </body>
 </html>
 
