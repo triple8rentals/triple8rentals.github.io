@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triple 8 Rentals – Appliance Rental Agreement</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── EmailJS Configuration ────────────────────────────────
+  // SETUP INSTRUCTIONS (one-time, ~5 minutes):
+  // 1. Go to https://www.emailjs.com and create a free account
+  // 2. Add an Email Service → connect your Gmail (triple8rent@gmail.com)
+  //    → Copy the "Service ID" → paste below as EMAILJS_SERVICE_ID
+  // 3. Create an Email Template:
+  //    → Subject: "New Signed Rental Agreement – {{lessee_name}}"
+  //    → Body can include: {{summary}}, {{lessee_name}}, {{signed_date}}, {{ip_address}}
+  //    → Copy the "Template ID" → paste below as EMAILJS_TEMPLATE_ID
+  // 4. Go to Account > API Keys → copy your Public Key → paste below
+  // 5. Save the file. Email will now send automatically on submission.
+
+  const EMAILJS_SERVICE_ID  = 'service_tt8ynol';   // ← replace
+  const EMAILJS_TEMPLATE_ID = 'template_ggvjz55';  // ← replace
+  const EMAILJS_PUBLIC_KEY  = 'D109R2sZt0uRpXJgf';   // ← replace
+</script>
+<style>
+  :root {
+    --bg: #f5f2eb;
+    --surface: #fffdf8;
+    --border: #c8bfa8;
+    --border-light: #e0d9cc;
+    --accent: #1a3a2a;
+    --accent-light: #2d5c42;
+    --gold: #b8860b;
+    --gold-light: #f0e6c4;
+    --text: #1c1c1c;
+    --text-muted: #6b6355;
+    --error: #8b2020;
+    --input-bg: #fff;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.6; }
+
+  .site-header { background: var(--accent); color: #fff; padding: 28px 40px; display: flex; align-items: center; gap: 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+  .logo-mark { width: 48px; height: 48px; background: var(--gold); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+  .site-header h1 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.5px; }
+  .site-header p { font-size: 12px; opacity: 0.7; margin-top: 2px; font-weight: 300; }
+  .header-badge { margin-left: auto; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; white-space: nowrap; }
+
+  .progress-bar { background: var(--accent); padding: 0 40px 16px; display: flex; gap: 0; }
+  .step-indicator { flex: 1; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 12px; border-radius: 4px; transition: background 0.2s; }
+  .step-indicator:hover { background: rgba(255,255,255,0.08); }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; transition: all 0.3s; flex-shrink: 0; }
+  .step-indicator.active .step-num { background: var(--gold); border-color: var(--gold); color: var(--accent); }
+  .step-indicator.done .step-num { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); color: #fff; }
+  .step-label { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 400; white-space: nowrap; }
+  .step-indicator.active .step-label, .step-indicator.done .step-label { color: rgba(255,255,255,0.8); }
+  .step-connector { flex: 0 0 20px; height: 2px; background: rgba(255,255,255,0.15); align-self: center; }
+
+  .main { max-width: 860px; margin: 40px auto; padding: 0 20px 60px; }
+  .form-section { display: none; animation: fadeIn 0.35s ease; }
+  .form-section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  .section-header { margin-bottom: 28px; }
+  .section-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); font-weight: 600; margin-bottom: 6px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--accent); font-weight: 600; }
+  .section-header p { color: var(--text-muted); margin-top: 6px; font-size: 13px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border-light); border-radius: 8px; padding: 28px; margin-bottom: 20px; box-shadow: var(--shadow); }
+  .card-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 600; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+
+  .field-row { display: grid; gap: 16px; margin-bottom: 16px; }
+  .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .field-group { display: flex; flex-direction: column; gap: 5px; }
+  label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+  label .required { color: var(--gold); margin-left: 2px; }
+
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"], select, textarea {
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 10px 14px;
+    border: 1.5px solid var(--border); border-radius: 5px; background: var(--input-bg);
+    color: var(--text); transition: border-color 0.2s, box-shadow 0.2s; width: 100%; outline: none; -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,58,42,0.1); }
+  input.error { border-color: var(--error); }
+  textarea { resize: vertical; min-height: 80px; }
+  .prefilled { background: var(--gold-light); border-color: var(--gold); color: var(--accent); font-weight: 500; }
+
+  .option-group { display: flex; gap: 12px; flex-wrap: wrap; }
+  .option-card { flex: 1; min-width: 160px; border: 2px solid var(--border); border-radius: 6px; padding: 14px 16px; cursor: pointer; transition: all 0.2s; background: var(--input-bg); display: flex; align-items: flex-start; gap: 10px; }
+  .option-card:hover { border-color: var(--accent-light); background: #f0f5f2; }
+  .option-card.selected { border-color: var(--accent); background: #e8f0ec; }
+  .option-card input[type="radio"] { width: auto; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+  .option-card-label { font-weight: 600; font-size: 13px; color: var(--text); display: block; }
+  .option-card-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; display: block; }
+
+  .contract-scroll { background: #fafaf7; border: 1px solid var(--border-light); border-radius: 6px; padding: 24px; max-height: 380px; overflow-y: auto; font-size: 12px; line-height: 1.8; color: var(--text-muted); margin-bottom: 16px; }
+  .contract-scroll h3 { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin: 16px 0 6px; }
+  .contract-scroll h3:first-child { margin-top: 0; }
+  .contract-scroll p { margin-bottom: 8px; }
+  .contract-scroll strong { color: var(--text); }
+  .scroll-notice { font-size: 11px; color: var(--text-muted); text-align: center; padding: 8px; background: var(--gold-light); border-radius: 4px; margin-bottom: 16px; }
+
+  .initials-row { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: var(--gold-light); border: 1px solid var(--gold); border-radius: 6px; margin-bottom: 12px; }
+  .initials-row label { flex: 1; text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 500; color: var(--text); }
+
+  /* Consent */
+  .consent-block { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #eef4f0; border: 2px solid var(--accent); border-radius: 6px; margin-bottom: 16px; cursor: pointer; transition: background 0.2s; }
+  .consent-block:hover { background: #e4f0ea; }
+  .consent-block input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+  .consent-block p { font-size: 12px; color: var(--text); line-height: 1.6; }
+  .consent-block strong { color: var(--accent); }
+
+  /* Audit badge */
+  .audit-badge { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #f0f5f2; border: 1px solid #b8d4c4; border-radius: 5px; margin-bottom: 16px; font-size: 11px; color: var(--text-muted); }
+  .audit-dot { width: 8px; height: 8px; background: #2d7a4f; border-radius: 50%; flex-shrink: 0; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .sig-toggle { display: flex; gap: 0; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
+  .sig-toggle button { flex: 1; font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; padding: 8px; border: none; background: var(--input-bg); color: var(--text-muted); cursor: pointer; font-weight: 500; transition: all 0.2s; }
+  .sig-toggle button.active { background: var(--accent); color: #fff; }
+  .sig-mode { display: none; }
+  .sig-mode.active { display: block; }
+
+  .signature-area { border: 2px solid var(--border); border-radius: 6px; background: var(--input-bg); position: relative; overflow: hidden; cursor: crosshair; }
+  .signature-area canvas { display: block; width: 100%; height: 160px; }
+  .sig-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: var(--border); font-size: 13px; pointer-events: none; transition: opacity 0.3s; text-align: center; width: 100%; }
+  .sig-label.hidden { opacity: 0; }
+  .sig-underline { position: absolute; bottom: 30px; left: 24px; right: 24px; height: 1px; background: var(--border); }
+  .sig-x { position: absolute; bottom: 36px; left: 16px; font-size: 18px; color: var(--border); }
+  .sig-controls { display: flex; justify-content: flex-end; margin-top: 8px; }
+  .btn-clear { font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 4px; background: transparent; color: var(--text-muted); cursor: pointer; }
+  .btn-clear:hover { background: var(--bg); }
+
+  .typed-sig { font-size: 32px; font-family: 'Playfair Display', serif; text-align: center; padding: 30px 20px; background: #fafaf7; border: 2px solid var(--border); border-radius: 6px; color: var(--accent); min-height: 100px; display: flex; align-items: center; justify-content: center; }
+
+  .field-error { font-size: 11px; color: var(--error); margin-top: 3px; display: none; }
+
+  .form-nav { display: flex; gap: 12px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-light); align-items: center; }
+  .btn-back { font-family: 'IBM Plex Sans', sans-serif; padding: 12px 24px; border: 1.5px solid var(--border); border-radius: 5px; background: transparent; color: var(--text-muted); cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+  .btn-back:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-next, .btn-submit { font-family: 'IBM Plex Sans', sans-serif; padding: 12px 32px; border: none; border-radius: 5px; background: var(--accent); color: #fff; cursor: pointer; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: all 0.2s; margin-left: auto; }
+  .btn-next:hover, .btn-submit:hover { background: var(--accent-light); }
+
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+  .summary-item { background: var(--bg); border-radius: 5px; padding: 12px 14px; }
+  .summary-item .s-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 3px; }
+  .summary-item .s-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  .send-status { display: none; text-align: center; padding: 80px 20px; }
+  .send-status.active { display: block; }
+  .spinner { width: 40px; height: 40px; border: 3px solid var(--border-light); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .success-screen { display: none; text-align: center; padding: 60px 20px; animation: fadeIn 0.5s ease; }
+  .success-screen.active { display: block; }
+  .success-icon { width: 72px; height: 72px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 32px; }
+  .success-screen h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--accent); margin-bottom: 12px; }
+  .success-screen p { color: var(--text-muted); max-width: 480px; margin: 0 auto 24px; font-size: 14px; }
+  .audit-summary { background: var(--bg); border: 1px solid var(--border-light); border-radius: 6px; padding: 16px 20px; text-align: left; max-width: 480px; margin: 0 auto 28px; font-size: 12px; }
+  .audit-summary h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 10px; font-weight: 600; }
+  .audit-row { display: flex; gap: 12px; margin-bottom: 5px; }
+  .audit-row .al { color: var(--text-muted); min-width: 100px; font-size: 11px; }
+  .audit-row .av { color: var(--text); font-weight: 500; font-family: 'IBM Plex Mono', monospace; font-size: 11px; word-break: break-all; }
+  .btn-download { font-family: 'IBM Plex Sans', sans-serif; display: inline-block; padding: 13px 32px; background: var(--accent); color: #fff; border: none; border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer; margin: 0 6px 12px; transition: background 0.2s; }
+  .btn-download:hover { background: var(--accent-light); }
+  .btn-download.outline { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+  .btn-download.outline:hover { background: var(--accent); color: #fff; }
+
+  .setup-notice { background: #fff8e6; border: 2px solid var(--gold); border-radius: 6px; padding: 16px 20px; margin-bottom: 20px; font-size: 12px; line-height: 1.7; }
+  .setup-notice strong { color: #7a5800; display: block; margin-bottom: 4px; font-size: 13px; }
+  .setup-notice a { color: var(--gold); }
+
+  .divider { border: none; border-top: 1px solid var(--border-light); margin: 20px 0; }
+
+  @media (max-width: 600px) {
+    .field-row.cols-2 { grid-template-columns: 1fr; }
+    .site-header { padding: 20px; flex-wrap: wrap; }
+    .header-badge { display: none; }
+    .progress-bar { padding: 0 16px 14px; }
+    .step-label { display: none; }
+    .main { margin: 20px auto; }
+    .card { padding: 18px; }
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-mark">888</div>
+  <div>
+    <h1>Triple 8 Rentals</h1>
+    <p>Appliance Rental Agreement</p>
+  </div>
+  <div class="header-badge">🔒 Secure Document</div>
+</header>
+
+<div class="progress-bar" id="progressBar">
+  <div class="step-indicator active" data-step="1" onclick="goToStep(1)">
+    <div class="step-num">1</div><span class="step-label">Parties</span>
+  </div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" data-step="2" onclick="goToStep(2)">
+    <div class="step-num">2</div><span class="step-label">Rental Terms</span>
+  </div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" data-step="3" onclick="goToStep(3)">
+    <div class="step-num">3</div><span class="step-label">Agreement</span>
+  </div>
+  <div class="step-connector"></div>
+  <div class="step-indicator" data-step="4" onclick="goToStep(4)">
+    <div class="step-num">4</div><span class="step-label">Review & Sign</span>
+  </div>
+</div>
+
+<main class="main">
+
+<!-- STEP 1 -->
+<div class="form-section active" id="step1">
+  <div class="section-header">
+    <div class="section-eyebrow">Step 1 of 4</div>
+    <h2>Parties to the Agreement</h2>
+    <p>Review the lessor information and fill in your details as the lessee.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">Lessor Information (Pre-filled)</div>
+    <div class="field-row cols-2">
+      <div class="field-group"><label>Lessor Name</label><input type="text" class="prefilled" value="Bobby Yocum" readonly></div>
+      <div class="field-group"><label>Phone</label><input type="text" class="prefilled" value="(404) 903-7961" readonly></div>
+    </div>
+    <div class="field-row cols-2">
+      <div class="field-group"><label>Address</label><input type="text" class="prefilled" value="8744 East 29th Place, Denver, CO 80238" readonly></div>
+      <div class="field-group"><label>Email</label><input type="text" class="prefilled" value="triple8rent@gmail.com" readonly></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Lessee Information (Your Details)</div>
+    <div class="field-row cols-2">
+      <div class="field-group">
+        <label>Full Legal Name <span class="required">*</span></label>
+        <input type="text" id="lesseeName" placeholder="First and Last Name">
+        <div class="field-error" id="lesseeNameErr">Please enter your full name.</div>
+      </div>
+      <div class="field-group">
+        <label>Phone Number <span class="required">*</span></label>
+        <input type="tel" id="lesseePhone" placeholder="(000) 000-0000">
+        <div class="field-error" id="lesseePhoneErr">Please enter a phone number.</div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <label>Delivery / Rental Address <span class="required">*</span></label>
+        <input type="text" id="lesseeAddress" placeholder="Street Address, City, State, ZIP">
+        <div class="field-error" id="lesseeAddressErr">Please enter your address.</div>
+      </div>
+    </div>
+    <div class="field-row cols-2">
+      <div class="field-group">
+        <label>Email Address <span class="required">*</span></label>
+        <input type="email" id="lesseeEmail" placeholder="you@example.com">
+        <div class="field-error" id="lesseeEmailErr">Please enter a valid email.</div>
+      </div>
+      <div class="field-group">
+        <label>Agreement Date <span class="required">*</span></label>
+        <input type="date" id="agreementDate">
+        <div class="field-error" id="agreementDateErr">Please select a date.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-nav">
+    <button class="btn-next" onclick="nextStep(1)">Continue to Rental Terms →</button>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="form-section" id="step2">
+  <div class="section-header">
+    <div class="section-eyebrow">Step 2 of 4</div>
+    <h2>Rental Terms</h2>
+    <p>Specify the appliance(s), rental period, and payment details.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">Appliance Details</div>
+    <div class="field-row">
+      <div class="field-group">
+        <label>Item(s) Being Rented <span class="required">*</span></label>
+        <input type="text" id="itemName" placeholder="e.g., Washer & Dryer Set – Samsung WA50R5400AW / DV50R5400EW">
+        <div class="field-error" id="itemNameErr">Please describe the appliance(s).</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Rental Period</div>
+    <div class="field-row cols-2">
+      <div class="field-group">
+        <label>Rental Start Date <span class="required">*</span></label>
+        <input type="date" id="startDate">
+        <div class="field-error" id="startDateErr">Please select a start date.</div>
+      </div>
+    </div>
+    <label style="display:block;margin-bottom:10px;margin-top:4px">Initial Term <span class="required">*</span></label>
+    <div class="option-group" id="termGroup">
+      <label class="option-card" onclick="selectTerm(this,'6')">
+        <input type="radio" name="term" value="6">
+        <div><span class="option-card-label">6 Months</span><span class="option-card-desc">Minimum term</span></div>
+      </label>
+      <label class="option-card" onclick="selectTerm(this,'12')">
+        <input type="radio" name="term" value="12">
+        <div><span class="option-card-label">12 Months</span><span class="option-card-desc">Standard term</span></div>
+      </label>
+      <label class="option-card" onclick="selectTerm(this,'other')">
+        <input type="radio" name="term" value="other">
+        <div><span class="option-card-label">Other</span><span class="option-card-desc">Custom (min. 6 mo.)</span></div>
+      </label>
+    </div>
+    <div id="otherTermWrap" style="display:none;margin-top:12px">
+      <div class="field-group"><label>Custom Term (months)</label><input type="number" id="otherTerm" min="6" placeholder="e.g., 9" style="max-width:140px"></div>
+    </div>
+    <div class="field-error" id="termErr" style="margin-top:8px">Please select an initial term.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Payment</div>
+    <div class="field-row cols-2">
+      <div class="field-group">
+        <label>Monthly Rental Fee ($) <span class="required">*</span></label>
+        <input type="number" id="rentalFee" placeholder="e.g., 75" min="0">
+        <div class="field-error" id="rentalFeeErr">Please enter the monthly fee.</div>
+      </div>
+      <div class="field-group">
+        <label>Payment Due Day (of month) <span class="required">*</span></label>
+        <input type="number" id="dueDay" placeholder="e.g., 1" min="1" max="28">
+        <div class="field-error" id="dueDayErr">Please enter a day (1–28).</div>
+      </div>
+    </div>
+    <label style="display:block;margin-bottom:10px">Payment Method <span class="required">*</span></label>
+    <div class="option-group" id="paymentGroup">
+      <label class="option-card" onclick="selectPayment(this,'auto')">
+        <input type="radio" name="payment" value="auto">
+        <div><span class="option-card-label">Automatic Recurring</span><span class="option-card-desc">Charged automatically each month</span></div>
+      </label>
+      <label class="option-card" onclick="selectPayment(this,'invoice')">
+        <input type="radio" name="payment" value="invoice">
+        <div><span class="option-card-label">Monthly Invoice</span><span class="option-card-desc">Invoice sent 5 days before due date</span></div>
+      </label>
+    </div>
+    <div class="field-error" id="paymentErr" style="margin-top:8px">Please select a payment method.</div>
+  </div>
+  <div class="form-nav">
+    <button class="btn-back" onclick="prevStep(2)">← Back</button>
+    <button class="btn-next" onclick="nextStep(2)">Continue to Agreement →</button>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="form-section" id="step3">
+  <div class="section-header">
+    <div class="section-eyebrow">Step 3 of 4</div>
+    <h2>Review the Agreement</h2>
+    <p>Please read the full contract carefully before initialing and proceeding.</p>
+  </div>
+  <div class="card">
+    <div class="scroll-notice">📄 Scroll through the full agreement before proceeding</div>
+    <div class="contract-scroll">
+      <h3>1. Rental Property</h3>
+      <p>The Lessor agrees to rent to the Lessee the Appliance(s) in good working order — tested prior to delivery, free from known defects, and including all standard parts for normal operation. The Lessee acknowledges receipt of the Appliance in good working order and accepts it as suitable and functional at the time of delivery.</p>
+      <h3>2. Rental Period</h3>
+      <p>The rental period commences on the start date and continues for the initial term selected. After the initial term, this Agreement will automatically continue on a month-to-month basis unless terminated per Section 9.</p>
+      <h3>3. Rental Fee and Payment</h3>
+      <p>First payment is due on the day of delivery. <strong>Late Fee:</strong> $10 for any payment more than 5 days past due. Payments more than 30 days past due accrue interest at 8% per annum.</p>
+      <p><strong>Automatic Recurring:</strong> Lessee authorizes Lessor to charge the card on file monthly. If declined, Lessee must update payment info within 5 days to avoid late fees.</p>
+      <p><strong>Monthly Invoice:</strong> Lessee is responsible for timely payment regardless of whether the invoice is received or viewed.</p>
+      <h3>4. Delivery and Installation</h3>
+      <p>Lessor will deliver and install the Appliance. Lessee is responsible for proper electrical, water, gas, and plumbing connections. Upon termination, Lessor will arrange pick-up.</p>
+      <h3>5. Use and Maintenance</h3>
+      <p>Lessee will use the Appliance only for its intended household purpose per manufacturer instructions. No commercial or business use. Lessee is responsible for routine maintenance and any damage from improper use or neglect, including water damage from a leaking hose or drain.</p>
+      <h3>6. Utility Costs</h3>
+      <p>Lessee is solely responsible for all utility costs (electricity, water, gas). If utilities are discontinued, Lessee's obligations remain.</p>
+      <h3>7. Relocation of Appliance</h3>
+      <p>The Appliance must remain at the specified address. Lessee shall not relocate it without Lessor's prior written consent.</p>
+      <h3>8. Access and Inspection</h3>
+      <p>Lessor may access the premises to inspect, repair, or retrieve the Appliance upon 48 hours' notice. This right shall not be unreasonably denied.</p>
+      <h3>9. Termination and Default</h3>
+      <p><strong>A. Initial Term:</strong> Lessee shall not terminate early. Early termination incurs liquidated damages of $200.</p>
+      <p><strong>B. Post-Initial Term:</strong> Either party may terminate with 30 days' written notice. Appliance must be returned in good working condition (normal wear and tear excepted).</p>
+      <p><strong>C. Default:</strong> Lessee defaults by missing two consecutive payments (5+ days past due) or otherwise breaching the Agreement. Lessor may retrieve the Appliance after 48 hours' notice. Default fee: $200.</p>
+      <p><strong>D. Failure to Return:</strong> Failure to make Appliance available within 7 days of termination results in a replacement fee of $200/unit ($400 for washer/dryer set).</p>
+      <p><strong>E. Late and Unpaid Amounts:</strong> All amounts due immediately upon notice. Unpaid amounts accrue 8% annual interest and may be referred for collection, with Lessee bearing collection costs.</p>
+      <h3>10. Security Interest</h3>
+      <p>Lessor retains ownership of the Appliance at all times. This is not a purchase, lease-to-own, or installment sale.</p>
+      <h3>11. Limitation of Liability and Indemnification</h3>
+      <p>Lessee assumes all risk of loss, damage, theft, or destruction from delivery until return. Lessor is not liable for injury or damage from use or malfunction, except for Lessor's gross negligence or willful misconduct. Lessee agrees to indemnify and hold harmless Lessor from claims arising out of Lessee's possession or use of the Appliance.</p>
+      <h3>12. Severability</h3>
+      <p>If any provision is found invalid, the remaining provisions continue in full force.</p>
+      <h3>13. Arbitration of Disputes</h3>
+      <p>Any dispute shall be resolved by binding arbitration under AAA rules in Denver, Colorado. The decision is final and binding. Each party bears its own costs, except the prevailing party may be awarded reasonable costs and attorneys' fees.</p>
+      <h3>14. Notices</h3>
+      <p>Notices are properly given in person, by text to the number listed, or by email. Deemed received on the date sent.</p>
+      <h3>Entire Agreement</h3>
+      <p>This Agreement constitutes the entire agreement between the parties. Any amendments must be in writing and signed by both parties.</p>
+    </div>
+
+    <div class="initials-row">
+      <label>Section 1 — I confirm receipt of the Appliance in good working order</label>
+      <input type="text" id="initials1" maxlength="4" placeholder="Init." style="width:80px;text-align:center;font-weight:600;font-size:16px;text-transform:uppercase;flex-shrink:0">
+    </div>
+    <div class="field-error" id="initials1Err" style="margin-bottom:12px">Please initial to confirm.</div>
+
+    <div class="field-row" style="margin-top:8px">
+      <div class="field-group">
+        <label>Comments or questions for the Lessor? (optional)</label>
+        <textarea id="comments" placeholder="Leave any notes or questions here…"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="form-nav">
+    <button class="btn-back" onclick="prevStep(3)">← Back</button>
+    <button class="btn-next" onclick="nextStep(3)">Review & Sign →</button>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="form-section" id="step4">
+  <div class="section-header">
+    <div class="section-eyebrow">Step 4 of 4</div>
+    <h2>Review & Sign</h2>
+    <p>Confirm your details, provide your electronic signature, and submit.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Agreement Summary</div>
+    <div class="summary-grid" id="summaryGrid"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Electronic Signature — Lessee</div>
+
+    <div class="audit-badge">
+      <div class="audit-dot"></div>
+      <p>Your IP address and submission timestamp will be recorded as part of the legally-admissible audit trail for this document. &nbsp;<strong id="auditTimestamp" style="color:var(--accent)"></strong></p>
+    </div>
+
+    <div class="consent-block" id="consentBlock" onclick="toggleConsent()">
+      <input type="checkbox" id="consentCheck" onclick="event.stopPropagation();consentGiven=this.checked;if(this.checked)hide('consentErr');">
+      <p><strong>I consent to sign this Agreement electronically.</strong> I understand my electronic signature is the legal equivalent of a handwritten signature. I have read, understood, and agree to be bound by all terms and conditions of this Appliance Rental Agreement.</p>
+    </div>
+    <div class="field-error" id="consentErr" style="margin-bottom:14px">You must check this box to consent to electronic signing before submitting.</div>
+
+    <div class="sig-toggle">
+      <button class="active" id="toggleDraw" onclick="setSigMode('draw')">✍&nbsp; Draw Signature</button>
+      <button id="toggleType" onclick="setSigMode('type')">T&nbsp; Type Signature</button>
+    </div>
+
+    <div class="sig-mode active" id="sigModeDraw">
+      <div class="signature-area" id="sigPad">
+        <canvas id="sigCanvas"></canvas>
+        <span class="sig-label" id="sigLabel">Draw your signature here</span>
+        <div class="sig-underline"></div>
+        <div class="sig-x">✕</div>
+      </div>
+      <div class="sig-controls"><button class="btn-clear" onclick="clearSig()">Clear</button></div>
+    </div>
+
+    <div class="sig-mode" id="sigModeType">
+      <div class="field-group" style="margin-bottom:10px">
+        <label>Type your full name as your signature</label>
+        <input type="text" id="typedSigInput" placeholder="Type your name…" style="font-size:14px" oninput="updateTypedSig()">
+      </div>
+      <div class="typed-sig" id="typedSigDisplay">Your name will appear here</div>
+    </div>
+    <div class="field-error" id="sigErr" style="margin-top:8px">Please provide your signature before submitting.</div>
+
+    <hr class="divider">
+    <div class="field-group" style="max-width:220px">
+      <label>Signed Date</label>
+      <input type="date" id="signedDate" readonly style="background:var(--bg)">
+    </div>
+  </div>
+
+  <div class="setup-notice" id="setupNotice">
+    <strong>⚙️ One-time EmailJS setup required to enable automatic email delivery</strong>
+    This form uses <a href="https://www.emailjs.com" target="_blank">EmailJS</a> (free service) to email the completed agreement to triple8rent@gmail.com. Open this HTML file in a text editor and follow the 3-step setup at the top of the &lt;script&gt; tag — takes about 5 minutes. <strong>Until configured, clicking Submit will open a printable/saveable PDF instead.</strong>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn-back" onclick="prevStep(4)">← Back</button>
+    <button class="btn-submit" id="submitBtn" onclick="submitForm()">✓ Submit &amp; Send Agreement</button>
+  </div>
+</div>
+
+<!-- Sending -->
+<div class="send-status" id="sendStatus">
+  <div class="spinner"></div>
+  <p style="color:var(--text-muted);font-size:14px;margin-top:8px">Sending signed agreement…</p>
+</div>
+
+<!-- Success -->
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">✓</div>
+  <h2>Agreement Signed &amp; Sent!</h2>
+  <p id="successMsg"></p>
+  <div class="audit-summary" id="auditSummary"></div>
+  <button class="btn-download" onclick="printAgreement()">🖨 Save / Print Your Copy</button>
+  <button class="btn-download outline" onclick="location.reload()">Start New Agreement</button>
+</div>
+
+</main>
+
+<script>
+let currentStep=1, selectedTerm='', selectedPayment='', sigDrawn=false, sigMode='draw', consentGiven=false;
+let auditData={ip:'collecting…', timestamp:'', userAgent:''};
+
+window.addEventListener('load',()=>{
+  initCanvas();
+  const today=new Date().toISOString().slice(0,10);
+  document.getElementById('agreementDate').value=today;
+  document.getElementById('signedDate').value=today;
+  auditData.timestamp=new Date().toISOString();
+  auditData.userAgent=navigator.userAgent.substring(0,100);
+  document.getElementById('auditTimestamp').textContent='Current time: '+new Date().toLocaleString();
+  fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{auditData.ip=d.ip;}).catch(()=>{auditData.ip='unavailable';});
+  if(EMAILJS_PUBLIC_KEY!=='YOUR_PUBLIC_KEY'){emailjs.init(EMAILJS_PUBLIC_KEY);document.getElementById('setupNotice').style.display='none';}
+});
+window.addEventListener('resize',initCanvas);
+
+function goToStep(n){if(n>=currentStep)return;showStep(n);}
+function showStep(n){
+  document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  document.querySelectorAll('.step-indicator').forEach(el=>{
+    const s=parseInt(el.dataset.step);el.classList.remove('active','done');
+    if(s===n)el.classList.add('active');else if(s<n)el.classList.add('done');
+  });
+  currentStep=n;window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextStep(f){if(!validateStep(f))return;if(f===3)buildSummary();showStep(f+1);}
+function prevStep(f){showStep(f-1);}
+
+function v(id){return document.getElementById(id).value;}
+function show(id){document.getElementById(id).style.display='block';}
+function hide(id){document.getElementById(id).style.display='none';}
+function setError(id,on){
+  const e=document.getElementById(id+'Err'),i=document.getElementById(id);
+  if(e)e.style.display=on?'block':'none';
+  if(i)i.classList.toggle('error',on);
+}
+
+function validateStep(n){
+  let ok=true;
+  if(n===1){
+    if(!v('lesseeName').trim()){setError('lesseeName',true);ok=false;}else setError('lesseeName',false);
+    if(!v('lesseePhone').trim()){setError('lesseePhone',true);ok=false;}else setError('lesseePhone',false);
+    if(!v('lesseeAddress').trim()){setError('lesseeAddress',true);ok=false;}else setError('lesseeAddress',false);
+    if(!v('lesseeEmail').includes('@')){setError('lesseeEmail',true);ok=false;}else setError('lesseeEmail',false);
+    if(!v('agreementDate')){setError('agreementDate',true);ok=false;}else setError('agreementDate',false);
+  }else if(n===2){
+    if(!v('itemName').trim()){setError('itemName',true);ok=false;}else setError('itemName',false);
+    if(!v('startDate')){setError('startDate',true);ok=false;}else setError('startDate',false);
+    if(!selectedTerm){show('termErr');ok=false;}else hide('termErr');
+    if(selectedTerm==='other'&&(!v('otherTerm')||parseInt(v('otherTerm'))<6)){alert('Custom term must be at least 6 months.');ok=false;}
+    if(!v('rentalFee')||parseFloat(v('rentalFee'))<0){setError('rentalFee',true);ok=false;}else setError('rentalFee',false);
+    if(!v('dueDay')||parseInt(v('dueDay'))<1||parseInt(v('dueDay'))>28){setError('dueDay',true);ok=false;}else setError('dueDay',false);
+    if(!selectedPayment){show('paymentErr');ok=false;}else hide('paymentErr');
+  }else if(n===3){
+    if(!v('initials1').trim()){show('initials1Err');ok=false;}else hide('initials1Err');
+  }
+  return ok;
+}
+
+function selectTerm(el,val){
+  document.querySelectorAll('#termGroup .option-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');selectedTerm=val;
+  document.getElementById('otherTermWrap').style.display=val==='other'?'block':'none';hide('termErr');
+}
+function selectPayment(el,val){
+  document.querySelectorAll('#paymentGroup .option-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');selectedPayment=val;hide('paymentErr');
+}
+function toggleConsent(){
+  const cb=document.getElementById('consentCheck');
+  cb.checked=!cb.checked;consentGiven=cb.checked;
+  if(cb.checked)hide('consentErr');
+}
+
+function buildSummary(){
+  const td=selectedTerm==='other'?v('otherTerm')+' months':selectedTerm+' months';
+  const d=parseInt(v('dueDay'));
+  const sfx=[11,12,13].includes(d)?'th':d%10===1?'st':d%10===2?'nd':d%10===3?'rd':'th';
+  const rows=[
+    ['Lessee',v('lesseeName')],['Address',v('lesseeAddress')],
+    ['Phone',v('lesseePhone')],['Email',v('lesseeEmail')],
+    ['Appliance(s)',v('itemName')],['Start Date',v('startDate')],
+    ['Initial Term',td],['Monthly Fee','$'+v('rentalFee')],
+    ['Payment Due',d+sfx+' of each month'],
+    ['Payment Method',selectedPayment==='auto'?'Automatic Recurring':'Monthly Invoice'],
+  ];
+  document.getElementById('summaryGrid').innerHTML=rows.map(([l,val])=>
+    `<div class="summary-item"><div class="s-label">${l}</div><div class="s-value">${val||'—'}</div></div>`).join('');
+  document.getElementById('signedDate').value=new Date().toISOString().slice(0,10);
+}
+
+let canvas,ctx,painting=false;
+function initCanvas(){
+  canvas=document.getElementById('sigCanvas');
+  const pad=document.getElementById('sigPad');
+  canvas.width=pad.offsetWidth||600;canvas.height=160;
+  ctx=canvas.getContext('2d');ctx.strokeStyle='#1a3a2a';ctx.lineWidth=2.2;ctx.lineCap='round';ctx.lineJoin='round';
+  canvas.addEventListener('mousedown',startDraw);canvas.addEventListener('mousemove',draw);
+  canvas.addEventListener('mouseup',stopDraw);canvas.addEventListener('mouseleave',stopDraw);
+  canvas.addEventListener('touchstart',e=>{e.preventDefault();startDraw(e.touches[0]);},{passive:false});
+  canvas.addEventListener('touchmove',e=>{e.preventDefault();draw(e.touches[0]);},{passive:false});
+  canvas.addEventListener('touchend',stopDraw);
+}
+function getPos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*(canvas.width/r.width),y:(e.clientY-r.top)*(canvas.height/r.height)};}
+function startDraw(e){painting=true;const p=getPos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);}
+function draw(e){
+  if(!painting)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke();
+  sigDrawn=true;document.getElementById('sigLabel').classList.add('hidden');hide('sigErr');
+}
+function stopDraw(){painting=false;}
+function clearSig(){ctx.clearRect(0,0,canvas.width,canvas.height);sigDrawn=false;document.getElementById('sigLabel').classList.remove('hidden');}
+function setSigMode(mode){
+  sigMode=mode;
+  ['Draw','Type'].forEach(m=>{
+    document.getElementById('sigMode'+m).classList.toggle('active',mode===m.toLowerCase());
+    document.getElementById('toggle'+m).classList.toggle('active',mode===m.toLowerCase());
+  });
+}
+function updateTypedSig(){
+  const val=v('typedSigInput');
+  document.getElementById('typedSigDisplay').textContent=val||'Your name will appear here';
+  if(val)hide('sigErr');
+}
+
+function getSigHtml(){
+  return sigMode==='draw'
+    ?`<img src="${canvas.toDataURL()}" style="max-width:280px;height:70px;object-fit:contain;display:block">`
+    :`<span style="font-family:Palatino,serif;font-size:28px;color:#1a3a2a;display:block;padding:8px 0">${v('typedSigInput')}</span>`;
+}
+
+function buildPdfHtml(){
+  const td=selectedTerm==='other'?v('otherTerm')+' months':selectedTerm+' months';
+  const pm=selectedPayment==='auto'?'Automatic Recurring Payment':'Monthly Invoice Payment';
+  const sig=getSigHtml();
+  const ts=auditData.timestamp||new Date().toISOString();
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Triple 8 Rentals – Signed Agreement</title>
+<style>body{font-family:Georgia,serif;max-width:720px;margin:0 auto;padding:40px;font-size:12.5px;line-height:1.75;color:#1c1c1c}
+h1{font-size:18px;text-align:center;border-bottom:2px solid #1a3a2a;padding-bottom:12px;margin-bottom:6px;letter-spacing:1px}
+.sub{text-align:center;font-size:11px;color:#666;margin-bottom:20px;font-family:Arial,sans-serif}
+h2{font-size:11.5px;margin:18px 0 5px;color:#1a3a2a;text-transform:uppercase;letter-spacing:1px;font-family:Arial,sans-serif}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;background:#f5f2eb;padding:16px;border-radius:4px;margin-bottom:20px;border:1px solid #d8d0be}
+.mi label{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#888;font-family:Arial,sans-serif;margin-bottom:2px}
+.mi span{font-size:13px;font-weight:600}p{margin-bottom:7px}strong{color:#111}
+.sig-block{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:36px;padding-top:20px;border-top:2px solid #1a3a2a}
+.sig-line{border-top:1px solid #333;margin-top:10px;padding-top:4px;font-size:10px;color:#666}
+.audit{background:#f0f5f2;border:1px solid #b8d4c4;border-radius:4px;padding:14px 18px;margin-top:28px;font-size:10.5px;color:#444;font-family:monospace;line-height:1.8}
+.audit-title{font-family:Arial,sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#1a3a2a;font-weight:700;display:block;margin-bottom:6px}
+</style></head><body>
+<h1>TRIPLE 8 RENTALS — APPLIANCE RENTAL AGREEMENT</h1>
+<div class="sub">Agreement Date: ${v('agreementDate')} &nbsp;|&nbsp; Signed: ${v('signedDate')}</div>
+<div class="meta">
+<div class="mi"><label>Lessor</label><span>Bobby Yocum</span></div><div class="mi"><label>Lessee</label><span>${v('lesseeName')}</span></div>
+<div class="mi"><label>Lessor Address</label><span>8744 East 29th Place, Denver, CO 80238</span></div><div class="mi"><label>Lessee Address</label><span>${v('lesseeAddress')}</span></div>
+<div class="mi"><label>Lessor Phone</label><span>(404) 903-7961</span></div><div class="mi"><label>Lessee Phone</label><span>${v('lesseePhone')}</span></div>
+<div class="mi"><label>Lessor Email</label><span>triple8rent@gmail.com</span></div><div class="mi"><label>Lessee Email</label><span>${v('lesseeEmail')}</span></div>
+<div class="mi"><label>Appliance(s)</label><span>${v('itemName')}</span></div><div class="mi"><label>Rental Start</label><span>${v('startDate')}</span></div>
+<div class="mi"><label>Initial Term</label><span>${td}</span></div><div class="mi"><label>Monthly Fee</label><span>$${v('rentalFee')}</span></div>
+<div class="mi"><label>Payment Due</label><span>${v('dueDay')}th of each month</span></div><div class="mi"><label>Payment Method</label><span>${pm}</span></div>
+</div>
+<h2>Terms &amp; Conditions</h2>
+<p>All terms of the Triple 8 Rentals Appliance Rental Agreement apply as reviewed and initialed by the Lessee (initials: <strong>${v('initials1').toUpperCase()}</strong>), including rental period, fees &amp; late charges, use &amp; maintenance obligations, utility costs, relocation restrictions, access &amp; inspection rights, termination &amp; default procedures (including $200 early termination fee; $200/$400 replacement fee), security interest, limitation of liability, severability, and binding arbitration in Denver, CO under AAA rules.</p>
+${v('comments')?`<p><strong>Lessee Notes:</strong> ${v('comments')}</p>`:''}
+<div class="sig-block">
+<div><p><strong>LESSOR:</strong> Bobby Yocum</p><div style="height:60px"></div><div class="sig-line">Bobby Yocum &nbsp;&nbsp; Date: ___________</div></div>
+<div><p><strong>LESSEE:</strong> ${v('lesseeName')}</p>${sig}<div class="sig-line">${v('lesseeName')} &nbsp;&nbsp; Date: ${v('signedDate')}</div></div>
+</div>
+<div class="audit">
+<span class="audit-title">🔒 Electronic Signature Audit Record</span>
+Signed (UTC): ${ts}<br>
+IP Address: ${auditData.ip||'recorded at submission'}<br>
+Browser/Device: ${(auditData.userAgent||navigator.userAgent).substring(0,100)}<br>
+Consent: Lessee explicitly consented to electronic signing (checkbox confirmed)<br>
+Signature Method: ${sigMode==='draw'?'Hand-drawn digital signature':'Typed electronic signature'}<br>
+Document: Triple 8 Rentals Appliance Rental Agreement v1.0
+</div>
+</body></html>`;
+}
+
+async function submitForm(){
+  if(!consentGiven){show('consentErr');document.getElementById('consentBlock').scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(sigMode==='draw'&&!sigDrawn){show('sigErr');return;}
+  if(sigMode==='type'&&!v('typedSigInput').trim()){show('sigErr');return;}
+  auditData.timestamp=new Date().toISOString();
+  const pdfHtml=buildPdfHtml();
+  const emailjsOk=EMAILJS_PUBLIC_KEY!=='YOUR_PUBLIC_KEY';
+  if(emailjsOk){
+    document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
+    document.getElementById('sendStatus').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    const td=selectedTerm==='other'?v('otherTerm')+' months':selectedTerm+' months';
+    try{
+      await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,{
+        to_email:'triple8rent@gmail.com',
+        lessee_name:v('lesseeName'),lessee_email:v('lesseeEmail'),
+        lessee_phone:v('lesseePhone'),lessee_address:v('lesseeAddress'),
+        item:v('itemName'),start_date:v('startDate'),term:td,
+        monthly_fee:'$'+v('rentalFee'),
+        payment_method:selectedPayment==='auto'?'Automatic Recurring':'Monthly Invoice',
+        signed_date:v('signedDate'),ip_address:auditData.ip,
+        signed_timestamp:auditData.timestamp,
+        summary:`Lessee: ${v('lesseeName')} | Appliance: ${v('itemName')} | Fee: $${v('rentalFee')}/mo | Term: ${td} | Signed: ${v('signedDate')} | IP: ${auditData.ip}`,
+        reply_to:v('lesseeEmail'),
+      });
+      showSuccess(true);
+    }catch(err){
+      document.getElementById('sendStatus').classList.remove('active');
+      alert('Email could not be sent ('+err.text+'). Opening printable PDF instead.');
+      openPrint(pdfHtml);showSuccess(false);
+    }
+  }else{
+    openPrint(pdfHtml);showSuccess(false);
+  }
+}
+
+function openPrint(html){const w=window.open('','_blank');w.document.write(html);w.document.close();w.focus();setTimeout(()=>w.print(),700);}
+
+function showSuccess(emailed){
+  document.getElementById('sendStatus').classList.remove('active');
+  document.getElementById('progressBar').style.display='none';
+  document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('successMsg').textContent=emailed
+    ?`Your signed agreement has been emailed to triple8rent@gmail.com and a confirmation sent to ${v('lesseeEmail')}. Bobby Yocum will be in touch to confirm delivery details.`
+    :`Your signed agreement has been generated. Use the button below to save or print your copy for your records.`;
+  document.getElementById('auditSummary').innerHTML=`
+    <h4>🔒 Audit Record</h4>
+    <div class="audit-row"><span class="al">Signed</span><span class="av">${new Date(auditData.timestamp).toLocaleString()}</span></div>
+    <div class="audit-row"><span class="al">IP Address</span><span class="av">${auditData.ip}</span></div>
+    <div class="audit-row"><span class="al">Lessee</span><span class="av">${v('lesseeName')}</span></div>
+    <div class="audit-row"><span class="al">Sig. Method</span><span class="av">${sigMode==='draw'?'Hand-drawn':'Typed'}</span></div>
+    <div class="audit-row"><span class="al">Consent</span><span class="av">Explicitly confirmed ✓</span></div>`;
+  document.getElementById('successScreen').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function printAgreement(){openPrint(buildPdfHtml());}
+</script>
+</body>
+</html>
